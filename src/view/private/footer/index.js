@@ -20,7 +20,7 @@ export default function Footer() {
                     </li>
                     <li>
                         <a href="#" target="_blank">
-                            <img src="http://www.iconarchive.com/download/i54037/danleech/simple/facebook.ico" alt="Facebook Logo" class="facebook-icon" /></a>
+                            <img src="http://www.iconarchive.com/download/i54037/danleech/simple/facebook.ico" alt="Facebook Logo" className="facebook-icon" /></a>
                     </li>
                     <li>
                         <a href="#" target="_blank">

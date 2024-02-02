@@ -21,3 +21,10 @@ export const createAccount = (payload) => {
     payload
   }
 }
+
+export const addPost = (payload)=>{
+  return {
+    type : actionStates.ADD_POST,
+    payload
+  }
+}

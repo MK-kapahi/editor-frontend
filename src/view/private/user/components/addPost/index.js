@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { CKEditor, CKEditorContext } from '@ckeditor/ckeditor5-react';
-
-import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
-import { Context } from '@ckeditor/ckeditor5-core';
-import { Bold, Italic } from '@ckeditor/ckeditor5-basic-styles';
-import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
+import CustomButton from '../../../../../components/atoms/customButton';
 import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useDispatch } from 'react-redux';
+import { addPost } from '../../../../../redux/action';
+import 'react-quill/dist/quill.snow.css';
+import 'quill-emoji/dist/quill-emoji.css';
+
 
 export default function AddPost() {
 
     const [editorHtml, setEditorHtml] = useState('');
+    const user = JSON.parse(localStorage.getItem("userInfo"))
 
+    const dispatch = useDispatch();
     const modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
@@ -20,30 +22,50 @@ export default function AddPost() {
             ['link', 'image', 'video'],
             ['clean'],
             [{ 'color': [] }],
+            ['emoji'],
         ],
     };
 
     const formats = [
         'header', 'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'link', 'image', 'video' , "color"
+        'list', 'bullet', 'link', 'image', 'video', "color" , "emoji"
     ];
 
     const handleChange = (html) => {
-        console.log(html)
         setEditorHtml(html);
     };
+
+    const handleSave = () => {
+        const data =
+        {
+            id: user._id,
+            content: editorHtml
+        }
+        dispatch(addPost({ data }))
+    }
     return (
         <>
             <section>
                 <div className='container'>
-                    <div className='row'>
-                        <ReactQuill
-                            theme="snow"
-                            modules={modules}s
-                            formats={formats}
-                            value={editorHtml}
-                            onChange={handleChange}
-                        />
+                    <div className='row d-flex flex-column justify-content-center align-content-center gap-5'>
+                        <div className='col-lg-8'>
+
+                            <ReactQuill
+                                theme="snow"
+                                modules={modules}
+                                formats={formats}
+                                value={editorHtml}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className='col-lg-8'>
+                            <div className='d-flex justify-content-center'>
+
+                            <CustomButton className='btn btn-primary' onClick={handleSave} >
+                                create
+                            </CustomButton>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section >

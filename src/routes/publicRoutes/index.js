@@ -18,14 +18,14 @@ export default function PublicRoutes() {
     useEffect(() => {
 
 
-        // if (token) {
-        //     setIsAuthenticated(true);
-        // }
+        if (token) {
+            setIsAuthenticated(true);
+        }
 
-        // else {
-        //     setIsAuthenticated(false);
-        //     navigate('/login')
-        // }
+        else {
+            setIsAuthenticated(false);
+            navigate('/login')
+        }
     }, [token]);
     return (
         <>
@@ -33,7 +33,7 @@ export default function PublicRoutes() {
             <Routes>
                 {!isAuthenticated ? <Route exact path={routes.LOGIN} element={<Login />}></Route> : ""}
                 {!isAuthenticated ? <Route exact path={routes.SIGN_UP} element={<Signup />}></Route> : ""}
-                <Route exact path="heyy" element={<AddPost />}></Route>
+                <Route exact path={routes.CREATE_POST} element={<AddPost />}></Route>
             </Routes>
             {isAuthenticated && <Footer />}
         </>

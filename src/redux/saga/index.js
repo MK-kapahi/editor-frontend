@@ -49,10 +49,22 @@ function* registerUser({ payload }) {
     }
 }
 
+function* createPost({ payload }) {
+    try {
+        console.log(payload)
+        const res = yield axios.post(URL + apiEndPoints?.CREATE_POST, payload?.data , option)
+        console.log(res)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 function* Saga() {
     yield all([
         takeLatest(actionStates.LOGIN, login),
-        takeLatest(actionStates.SIGNUP, registerUser),])
+        takeLatest(actionStates.SIGNUP, registerUser),
+        takeLatest(actionStates.ADD_POST, createPost),
+    ])
 }
 
 export default Saga;

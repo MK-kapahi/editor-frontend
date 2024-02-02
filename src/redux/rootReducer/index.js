@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import { POST_REDUCER } from "../reducer/postReducer";
+import { SET_ALL_POST_REDUCER } from "../reducer/setPostReducer";
 
 
 const appReducer = combineReducers({
- postReducer :  POST_REDUCER
+ postReducer :  SET_ALL_POST_REDUCER
 });
 const rootReducer = (state, action) => {
   return appReducer(state, action);
