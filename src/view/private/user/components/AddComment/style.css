@@ -1,0 +1,24 @@
+.text-emoji
+{
+ border: 1px solid black;
+ border-radius: 4px;
+ margin-bottom: 30px;
+}
+
+.comment-text{
+    width: 200px !important;
+    border: none !important;
+    height: unset !important;
+
+}
+
+.add-comment-btn
+{
+    width: 50px;
+    margin-bottom: 30px;
+}
+
+.comment-text:focus
+{
+    border: none !important;
+}

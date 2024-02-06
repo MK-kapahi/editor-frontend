@@ -25,7 +25,8 @@ export const URL = process.env.REACT_APP_API_BASE_URL
 export const routes = {
     LOGIN : "login",
     SIGN_UP : "sign-up",
-    CREATE_POST : "create-post"
+    CREATE_POST : "create-post",
+    HOME : "home"
 }
 
 export const apiEndPoints =
@@ -33,5 +34,7 @@ export const apiEndPoints =
   LOGIN: "login",
   REGISTER: "signup",
   CREATE_POST : "createPost",
-  GET_POST : "getPost"
+  GET_POST : "getPost",
+  ADD_COMMENT : "addComment",
+  GET_COMMENT : "getComment"
 }

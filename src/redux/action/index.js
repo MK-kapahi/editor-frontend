@@ -28,3 +28,38 @@ export const addPost = (payload)=>{
     payload
   }
 }
+
+export const getAllPost = (payload) =>{
+  return {
+    type : actionStates.GET_ALL_POST,
+    payload
+  }
+}
+
+export const setAllPost = (payload) =>{
+  return {
+    type : actionStates.SET_ALL_POST,
+    payload
+  }
+}
+
+export const addComment = (payload) =>{
+  return {
+    type : actionStates.ADD_COMMENT,
+    payload
+  }
+}
+
+export const getComment = (payload) =>{
+  return {
+    type : actionStates.GET_COMMENT,
+    payload
+  }
+}
+
+export const setComment = (payload) =>{
+  return {
+    type : actionStates.SET_COMMENT,
+    payload
+  }
+}

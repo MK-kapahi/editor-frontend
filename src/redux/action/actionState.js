@@ -4,5 +4,8 @@ export const actionStates = {
     LOGOUT : "LOGOUT",
     ADD_POST : "ADD_POST",
     GET_ALL_POST : "GET_ALL_POST",
-    SET_ALL_POST : "SET_ALL_POST"
+    SET_ALL_POST : "SET_ALL_POST",
+    ADD_COMMENT : "ADD_COMMENT",
+    GET_COMMENT : "GET_COMMENT",
+    SET_COMMENT : "SET_COMMENT",
 }

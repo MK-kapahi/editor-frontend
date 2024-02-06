@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate, Redirect, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { routes } from "../../shared/constant";
 import Login from "../../view/public/login";
 import Signup from "../../view/public/signup";
@@ -7,6 +7,7 @@ import Footer from "../../view/private/footer";
 import Navbar from "../../view/private/navbar";
 import Cookies from "universal-cookie";
 import AddPost from "../../view/private/user/components/addPost";
+import Home from "../../view/private/user/home";
 
 export default function PublicRoutes() {
     const cookies = new Cookies();
@@ -34,6 +35,7 @@ export default function PublicRoutes() {
                 {!isAuthenticated ? <Route exact path={routes.LOGIN} element={<Login />}></Route> : ""}
                 {!isAuthenticated ? <Route exact path={routes.SIGN_UP} element={<Signup />}></Route> : ""}
                 <Route exact path={routes.CREATE_POST} element={<AddPost />}></Route>
+                <Route exact path={routes.HOME} element={<Home />}></Route>
             </Routes>
             {isAuthenticated && <Footer />}
         </>

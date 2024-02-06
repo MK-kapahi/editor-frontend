@@ -6,11 +6,15 @@ import { useDispatch } from 'react-redux';
 import { addPost } from '../../../../../redux/action';
 import 'react-quill/dist/quill.snow.css';
 import 'quill-emoji/dist/quill-emoji.css';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function AddPost() {
 
     const [editorHtml, setEditorHtml] = useState('');
+    const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem("userInfo"))
 
     const dispatch = useDispatch();
@@ -28,7 +32,7 @@ export default function AddPost() {
 
     const formats = [
         'header', 'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'link', 'image', 'video', "color" , "emoji"
+        'list', 'bullet', 'link', 'image', 'video', "color", "emoji"
     ];
 
     const handleChange = (html) => {
@@ -41,7 +45,22 @@ export default function AddPost() {
             id: user._id,
             content: editorHtml
         }
-        dispatch(addPost({ data }))
+        dispatch(addPost({ data, createPostReply }))
+    }
+
+    const createPostReply = (response) => {
+        if (response.status == 200) {
+            toast.success("Post created Successfully", {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+            navigate("/home")
+        }
+
+        else {
+            toast.error(response?.response?.data?.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+        }
     }
     return (
         <>
@@ -61,9 +80,9 @@ export default function AddPost() {
                         <div className='col-lg-8'>
                             <div className='d-flex justify-content-center'>
 
-                            <CustomButton className='btn btn-primary' onClick={handleSave} >
-                                create
-                            </CustomButton>
+                                <CustomButton className='btn btn-primary' onClick={handleSave} >
+                                    create
+                                </CustomButton>
                             </div>
                         </div>
                     </div>

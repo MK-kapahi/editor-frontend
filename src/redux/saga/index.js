@@ -1,9 +1,10 @@
 import axios from "axios"
-import { takeLatest, all } from "redux-saga/effects";
+import { takeLatest, all, put, take } from "redux-saga/effects";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { actionStates } from "../action/actionState";
 import { URL, apiEndPoints } from "../../shared/constant";
+import { setAllPost, setComment } from "../action";
 
 const option = {
     withCredentials: 'include',
@@ -54,9 +55,46 @@ function* createPost({ payload }) {
         console.log(payload)
         const res = yield axios.post(URL + apiEndPoints?.CREATE_POST, payload?.data , option)
         console.log(res)
+        payload?.createPostReply(res)
     } catch (error) {
         console.log(error)
     }
+}
+
+function* getPost({payload})
+{
+    try {
+        console.log(payload)
+        const res = yield axios.get(URL + apiEndPoints?.GET_POST, option)
+
+        yield put(setAllPost(res?.data))
+        console.log(res)
+    } catch (error) {
+        console.log(error)
+    }  
+}
+
+function* addCommentToPost({payload})
+{
+    try {
+        console.log(payload)
+        const res = yield axios.post(URL + apiEndPoints?.ADD_COMMENT, payload?.data , option)
+        console.log(res)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+function* getComments({payload})
+{
+    try {
+        const res = yield axios.get(URL + apiEndPoints?.GET_COMMENT+"/"+payload?.id, option)
+
+        yield put(setComment(res?.data))
+        console.log(res)
+    } catch (error) {
+        console.log(error)
+    }  
 }
 
 function* Saga() {
@@ -64,6 +102,9 @@ function* Saga() {
         takeLatest(actionStates.LOGIN, login),
         takeLatest(actionStates.SIGNUP, registerUser),
         takeLatest(actionStates.ADD_POST, createPost),
+        takeLatest(actionStates.GET_ALL_POST , getPost),
+        takeLatest(actionStates.ADD_COMMENT , addCommentToPost),
+        takeLatest(actionStates.GET_COMMENT , getComments),
     ])
 }
 

@@ -1,21 +1,39 @@
 import React from "react";
 import "./style.css"
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
     return (<>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="navigation">
                 <div className="logo">
-                    <a className="no-underline" href="#">
+                    {/* <a className="no-underline" href="#">
                         Instagram
-                    </a>
+                    </a> */}
                 </div>
                 <div className="navigation-search-container">
                     <i className="fa fa-search"></i>
-                    <input className="search-field" type="text" placeholder="Search" />
+                    {/* <input className="search-field" type="text" placeholder="Search" /> */}
                     <div className="search-container">
                         <div className="search-container-box">
                             <div className="search-results">
+                                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/home" activeclassname="active" >
+                                            Home
+                                        </NavLink>
+
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/create-post" activeclassname="active" >
+                                            Create post
+                                        </NavLink>
+
+                                    </li>
+
+
+                                </ul>
                             </div>
                         </div>
                     </div>

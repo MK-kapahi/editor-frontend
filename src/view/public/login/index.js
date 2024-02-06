@@ -100,7 +100,7 @@ export default function Login() {
             // toast.success("Login SucessFull", {
             //     position: toast.POSITION.TOP_RIGHT,
             // })
-            navigate("/"+routes.CREATE_POST)
+            navigate("/"+routes.HOME)
         }
     }
     return (<>
