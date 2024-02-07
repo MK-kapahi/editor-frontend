@@ -164,6 +164,11 @@
     font-size: 14px;
   }
   
+  .login-up-button
+  {
+    border: none;
+    background: none;
+  }
   
   
   /* Mobile Styles */

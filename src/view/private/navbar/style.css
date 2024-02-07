@@ -127,3 +127,10 @@ main {
   -ms-user-select: none;
 }
 
+.active
+{
+    background-color: #0d6efd;
+    color: white !important;
+    font-size: 18px;
+    border-radius: 30px;
+}

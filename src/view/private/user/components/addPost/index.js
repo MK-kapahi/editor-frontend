@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import CustomButton from '../../../../../components/atoms/customButton';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+
 import { useDispatch } from 'react-redux';
 import { addPost } from '../../../../../redux/action';
-import 'react-quill/dist/quill.snow.css';
-import 'quill-emoji/dist/quill-emoji.css';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -50,9 +48,9 @@ export default function AddPost() {
 
     const createPostReply = (response) => {
         if (response.status == 200) {
-            toast.success("Post created Successfully", {
-                position: toast.POSITION.TOP_RIGHT,
-            })
+            // toast.success("Post created Successfully", {
+            //     position: toast.POSITION.TOP_RIGHT,
+            // })
             navigate("/home")
         }
 

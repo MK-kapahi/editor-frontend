@@ -97,6 +97,20 @@ function* getComments({payload})
     }  
 }
 
+function* logout({ payload }) {
+    try {
+        const response = yield axios.delete(URL + apiEndPoints.LOGOUT, option)
+        console.log(response)
+        payload?.handleResponse(response)
+        localStorage.clear()
+    } catch (error) {
+        toast.error(error?.response?.data?.message, {
+            position: toast.POSITION.TOP_RIGHT,
+        })
+        console.log(error)
+    }
+}
+
 function* Saga() {
     yield all([
         takeLatest(actionStates.LOGIN, login),
@@ -105,6 +119,7 @@ function* Saga() {
         takeLatest(actionStates.GET_ALL_POST , getPost),
         takeLatest(actionStates.ADD_COMMENT , addCommentToPost),
         takeLatest(actionStates.GET_COMMENT , getComments),
+        takeLatest(actionStates.LOGOUT , logout)
     ])
 }
 

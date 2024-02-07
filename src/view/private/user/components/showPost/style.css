@@ -3,3 +3,160 @@
     width: 90%;
     border: 2px solid greenyellow;
 }
+
+.addComment-text
+{
+    width: 70%;
+}
+
+.show-comment-btn
+{
+    background: none;
+    border: none;
+}
+
+
+  
+  /* Format the Icons */
+ 
+  
+  
+  
+  .container-post {
+
+    width: 100%;
+    
+    /* Begin styling card */
+    .card {
+      background-color: #eee;
+      margin: 0 auto; /*centers the block element*/
+      border: 1px solid #8C8D8F;
+      border-radius: 8px;
+      overflow: auto;
+  
+      .card-header {
+      padding: 1%;
+  
+        .profile-pic {
+          display: inline-block;
+          background: #000;
+          height: 35px;
+          width: 35px;
+          border-radius: 50px;
+          margin-right: 5px;
+        }
+  
+        .profile-info {
+          display: inline-block;
+          font-family: 'Muli', sans-serif;
+  
+          .name {
+            font-size: 18px;
+            color: #FF263F;
+            font-weight: 600;
+          }
+  
+          .location {
+            color: #111;
+          }
+        }
+  
+        .time {
+          display: inline-block;
+          font-family: 'Muli', sans-serif;
+          font-size: 13px;
+          position: relative;
+        }
+      }
+  
+      .content {
+        img {
+          width: 100%;
+        }
+      }
+  
+      .card-footer {
+        font-family: 'Muli', sans-serif;
+        padding: 15px;
+        box-sizing: border-box;
+  
+        .likes {
+          margin-bottom: 10px;
+          font-size: 13px;
+          
+          .fa {
+            color: #111;
+          }
+  
+          .fa-heart:hover {
+            color: #FF263F;
+          }
+        }
+  
+        .description p {
+          margin: 0;
+        }
+  
+        span {
+          color: #FF263F;
+          margin-right: 4px;
+          font-weight: 600;
+        }
+  
+        .comments {
+          font-size: 14px;
+          padding: 1%;
+          line-height: 1.5;
+        }
+        
+        
+        form {
+          .heart {
+            display: inline-block;
+            width: 14%;
+            .fa {
+              position: relative;
+              top: 7px;
+              font-size: 24px;
+              float: left;
+              color: #111;
+            }
+            
+            .fa-heart:hover {
+              color: #FF263F;
+            }
+          }
+  
+          .add-comment {
+            display: inline-block;
+            width: 70%;
+  
+            input {
+              width: 100%;
+              border: 0px solid #8C8D8F;
+              border-radius: 5px;
+              font-size: 14px;
+              font-family: 'Muli', sans-serif;
+              padding: 1%
+            }
+          }
+  
+          .options {
+            display: inline-block;
+            width: 6%;
+
+            
+            .fa {
+              position: relative;
+              top: 7px;
+              font-size: 24px;
+              color: #111;
+            }
+          }
+        }
+      }
+    }
+    /*End styling card*/
+    
+  }
+  

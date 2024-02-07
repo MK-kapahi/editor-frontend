@@ -97,10 +97,15 @@ export default function Login() {
     const loginResponse = (res) => {
         console.log(res);
         if (res.status === 200) {
-            // toast.success("Login SucessFull", {
-            //     position: toast.POSITION.TOP_RIGHT,
-            // })
-            navigate("/"+routes.HOME)
+            toast.success("Login SucessFull", {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+            navigate("/" + routes.HOME)
+        }
+        else {
+            toast.error(res?.response?.data?.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            })
         }
     }
     return (<>
@@ -134,7 +139,7 @@ export default function Login() {
                             </form>
                         </div>
                         <div className="sign-up-container">
-                            <p>Don't have an account? <CustomButton type="button" onClick={navigateToRegister} >Sign up</CustomButton></p>
+                            <p>Don't have an account? <CustomButton type="button" onClick={navigateToRegister} className="sign-up-button" >Sign up</CustomButton></p>
                         </div>
 
                     </div>

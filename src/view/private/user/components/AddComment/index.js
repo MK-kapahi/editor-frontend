@@ -5,17 +5,34 @@ import EmojiPicker from 'emoji-picker-react';
 import "./style.css"
 import { useDispatch } from 'react-redux';
 import { addComment } from '../../../../../redux/action';
+import InputEmoji from "react-input-emoji";
 
-export default function AddComment({postId ,  userId , parentId}) {
+
+export default function AddComment({ postId, userId, parentId }) {
   const [isEmojiPickerVisible, setEmojiPickerVisibility] = useState(false);
-  const [comment , setComment ] = useState("");
+  const [comment, setComment] = useState("");
+  const [text, setText] = useState("");
   const dispatch = useDispatch();
+
+
+  function handleOnEnter(text) {
+    const data = {
+      postId: postId,
+      userId: userId,
+      comment: text,
+      parentId: parentId
+    }
+
+    dispatch(addComment({ data }))
+
+    setComment("")
+  }
 
   const toggleEmojiPicker = () => {
     setEmojiPickerVisibility(!isEmojiPickerVisible);
   };
 
-  const handleInputChange = (e)=>{
+  const handleInputChange = (e) => {
 
     setComment(e.target.value)
   }
@@ -25,17 +42,8 @@ export default function AddComment({postId ,  userId , parentId}) {
     setComment((prevComment) => prevComment + selectedEmoji);
     setEmojiPickerVisibility(false);
   };
-  const handleAddComment = () =>{
-    const data = {
-      postId : postId,
-      userId : userId,
-      comment : comment ,
-      parentId : parentId
-    }
-
-    dispatch(addComment({data}))
-
-    setComment("")
+  const handleAddComment = () => {
+    
 
   }
   return (
@@ -43,11 +51,19 @@ export default function AddComment({postId ,  userId , parentId}) {
 
       <div className='d-flex text-emoji justify-content-around'>
 
-        <CustomInputFields type="text" className="comment-text" value={comment} onChange={handleInputChange} ></CustomInputFields>
+        {/* <CustomInputFields type="text" className="comment-text" value={comment} onChange={handleInputChange} ></CustomInputFields> */}
+        <InputEmoji
+          value={text}
+          onChange={setText}
+          cleanOnEnter
+          onEnter={handleOnEnter}
+          placeholder="Type a message"
+        />
         {/* <CustomButton onClick={toggleEmojiPicker} className="btn">😀</CustomButton> */}
         {/* {isEmojiPickerVisible ? <EmojiPicker onEmojiClick={handleEmojiSelection} open={true} /> : " "} */}
       </div>
-      <CustomButton type="button" className="btn btn-primary add-comment-btn" onClick={handleAddComment}>Add </CustomButton>
+      
+      {/* <CustomButton type="button" className="btn btn-primary add-comment-btn" onClick={handleAddComment}>Add </CustomButton> */}
     </div>
   )
 }

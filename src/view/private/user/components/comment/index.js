@@ -5,28 +5,63 @@ import AddComment from '../AddComment';
 import { useDispatch } from 'react-redux';
 import { getComment } from '../../../../../redux/action';
 import DisplayReply from '../replyDisplay';
-
+import { format , differenceInHours } from 'date-fns';
 export default function CommentDisplay({ postId, comments, userId }) {
 
     const dispatch = useDispatch()
     const [replyDiv, setReplyDiv] = useState(false)
     const [commentSection, showCommentSection] = useState(false)
-    const handleShowComment = (postId) => {
+    const handleShowComment = (postId, commentId, index) => {
         const id = postId;
 
-        showCommentSection(true)
-        dispatch(getComment({ id }))
+        if (commentSection) {
+            showCommentSection(false)
+        }
+
+        else {
+
+            const commentIndex = comments.findIndex(element => element._id == commentId)
+
+            if (commentIndex == index) {
+                showCommentSection(true)
+                dispatch(getComment({ id }))
+
+            }
+
+        }
 
     }
+    const formatCreatedAt = (createdAt) => {
+        const currentDate = new Date();
+        const commentDate = new Date(createdAt);
+        const hoursDifference = differenceInHours(currentDate, commentDate);
+
+        if (hoursDifference < 24) {
+            // Less than 24 hours, show time
+            return format(commentDate, 'hh:mm:ss a');
+        } else {
+            // More than 24 hours, show only date
+            return format(commentDate, 'MM/dd/yyyy');
+        }
+    };
     const handleAddReply = () => {
-        setReplyDiv(true)
+
+        if(replyDiv)
+        {
+            setReplyDiv(false)
+        }
+
+        else 
+        {
+            setReplyDiv(true)
+        }
     }
     return (
         <>
             <div className='d-flex flex-column  align-items-center mt-3'>
 
                 {
-                    comments?.filter(element => element.parentId === null).map((element) => {
+                    comments?.filter(element => element.parentId === null).map((element, index) => {
                         return (
 
                             <div className="comment">
@@ -44,15 +79,16 @@ export default function CommentDisplay({ postId, comments, userId }) {
                                     <p>{element.comment}</p>
                                 </div>
                                 <div className="footer-comment ">
-                                    <button className="btn"><i class="ri-emotion-line"></i></button>
+                                    <button className="btn-comment"><i class="ri-emotion-line"></i></button>
                                     <div className="divider"></div>
                                     <CustomButton onClick={handleAddReply}>Reply</CustomButton>
-                                    {replyDiv ? <AddComment postId={postId} userId={userId} parentId={element._id} ></AddComment> : ""}
+                                    {/* {replyDiv ? <AddComment postId={postId} userId={userId} parentId={element._id} ></AddComment> : ""} */}
                                     <div className="divider"></div>
-                                    <CustomButton onClick={()=>handleShowComment(postId)}>show Replies</CustomButton>
+                                    <CustomButton onClick={() => handleShowComment(postId, element._id, index)} className="show-comment-btn">show Replies</CustomButton>
 
-                                    <span className="is-mute">{element?.createdAt}</span>
+                                    <span className="is-mute">{formatCreatedAt(element?.createdAt)}</span>
                                 </div>
+                                {replyDiv ? <AddComment postId={postId} userId={userId} parentId={element._id} ></AddComment> : ""}
                                 {commentSection ? <DisplayReply postId={postId} comments={comments} userId={userId} commentId={element._id} /> : ""}
                             </div>
                         )

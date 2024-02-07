@@ -36,5 +36,6 @@ export const apiEndPoints =
   CREATE_POST : "createPost",
   GET_POST : "getPost",
   ADD_COMMENT : "addComment",
-  GET_COMMENT : "getComment"
+  GET_COMMENT : "getComment",
+  LOGOUT : "logout"
 }

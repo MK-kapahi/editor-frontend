@@ -152,7 +152,7 @@ export default function Signup() {
         }
 
         else {
-            toast.error(response.response.data.message
+            toast.error(response?.response?.data?.message
                 , {
                     position: toast.POSITION.TOP_RIGHT,
                 })
@@ -183,7 +183,7 @@ export default function Signup() {
                                 </div>
                             </div>
                             <div class="option">
-                                <p>Have an account? <CustomButton onClick={navigateToLogin}>Log in</CustomButton></p>
+                                <p>Have an account? <CustomButton onClick={navigateToLogin} className="login-up-button" >Log in</CustomButton></p>
                             </div>
                             <div class="footer">
                                 <ul>

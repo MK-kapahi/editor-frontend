@@ -1,8 +1,37 @@
 import React from "react";
 import "./style.css"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import CustomButton from "../../../components/atoms/customButton";
+import { toast } from "react-toastify"
+import { logoutUser } from "../../../redux/action";
+import { useDispatch } from "react-redux";
+import { routes } from "../../../shared/constant";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Navbar() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+        localStorage.clear()
+        dispatch(logoutUser({ handleResponse }))
+    }
+    const handleResponse = (response) => {
+        navigate("/"+routes.LOGIN)
+        if (response?.status === 200) {
+
+            toast.success("logout  Successfullly "
+                , {
+                    position: toast.POSITION.TOP_RIGHT,
+                })
+        }
+
+        else {
+            toast.error(response?.response?.data?.message
+                , {
+                    position: toast.POSITION.TOP_RIGHT,
+                })
+        }
+    }
     return (<>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="navigation">
@@ -39,24 +68,9 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="navigation-icons">
-                    <a href="https://instagram.com/mimoudix" target="_blank" className="navigation-link">
-                        <i className="far fa-compass"></i>
-                    </a>
-                    <a className="navigation-link notifica">
-                        <i className="far fa-heart">
-                            <div className="notification-bubble-wrapper">
-                                <div className="notification-bubble">
-                                    <span className="notification-count">99</span>
-                                </div>
-                            </div>
-                        </i>
-                    </a>
-                    <a href="https://instagram.com/mimoudix" className="navigation-link">
-                        <i className="far fa-user-circle"></i>
-                    </a>
-                    <a href="https://instagram.com/mimoudix" id="signout" className="navigation-link">
-                        <i className="fas fa-sign-out-alt"></i>
-                    </a>
+                    <div>
+                        <CustomButton className="btn btn-outline-primary" type="button" onClick={handleLogout}> Logout </CustomButton>
+                    </div>
                 </div>
             </div>
         </nav>
